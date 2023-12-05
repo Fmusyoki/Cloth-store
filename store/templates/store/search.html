@@ -1,0 +1,50 @@
+{% extends "store/base.html"%}
+{% load static %}
+{% block content %}
+{% if searched %}
+    <div class="center-text">
+        <h2>Our <span>Categories</span></h2>
+    </div>
+    <div class="category-container">
+        {% for category in categories %}
+        <a href="" class="category-box">
+            <img src="{{ category.image.url }}" alt="category"/>
+            <span>{{ category.name }}</span>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="products">
+        {% for item in searches %}
+        <div class="row">
+            {% if item.product_image %} 
+                <img src="{{ item.product_image.url }}" alt="{{ profile_details.title }}">
+            {% else %} 
+            {% endif %}
+            <div class="product-text">
+                <h5>HOT</h5>
+            </div>
+            <div class="heart-icon">
+                <i class='bx bx-heart'></i>
+            </div>
+            <div class="ratting">
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star-half'></i>
+            </div>
+            <div class="price">
+                <h4>Price</h4>
+                <p>KSh {{ item.Selling_price}}</p>
+            </div>
+        </div>
+        <a href="{% url 'detail' item.id %}">
+        {% endfor %}
+    </div>
+
+{% else %}
+    <h1>No items found</h1>
+{% endif %}
+
+
+
+{% endblock %}

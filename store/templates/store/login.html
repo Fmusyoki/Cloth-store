@@ -1,0 +1,53 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'images' %}">
+    
+</head>
+<body>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="" method="POST">
+                    {% csrf_token %}   
+                    <h2>Rstore Login</h2>
+                    <div class="inputbox">
+                        <ion-icon name="mail"></ion-icon>
+                        <input type="text" name ="username"required>
+                        <label for="">Username</label>
+                    </div>
+                    {% comment %} <div class="inputbox">
+                        <ion-icon name="mail"></ion-icon>
+                        <input type="text" name ="Email"required>
+                        <label for="">Email</label>
+                    </div> {% endcomment %}
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed"></ion-icon>
+                        <input type="password" name="password" required>
+                        <label for="">Password</label>
+                    </div>
+                    <div class="forget">
+                        <label for=""><input type="checkbox">Remember me</label> <a href="#">Forget password?</a>
+                    </div>
+                    {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{request.GET.next}}">
+                    {% endif %}
+                    <button type="submit">Login</button>
+                    <div class="register">
+                        <p>Don't have an account? <a href="{% url 'register' %}">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>

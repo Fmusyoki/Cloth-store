@@ -1,0 +1,125 @@
+{% extends "store/base.html"%}
+{% load static %}
+{% block content %}
+	<div class="center-text">
+		<h2>Our <span>Categories</span></h2>
+	</div>
+	<div class="category-container">
+		{% for category in categories %}
+		<a href="{% url 'category' category.id %}" class="category-box">
+			<img src="{{ category.image.url }}" alt="category"/>
+			<span>{{ category.name }}</span>
+		</a>
+		{% endfor %}
+	</div>
+	<div class="input-box">
+		<form class="d-flex"method="POST" action="{% url 'search' %}">
+			{% csrf_token %}
+			<i class="uil uil-search"></i>
+			<input type="text" placeholder="Shoes" name="searched"/>
+			{% comment %} <button class="button">Search</button> {% endcomment %}
+		</form>
+		
+	</div>
+
+	<div class="products">
+        {% for item in category %}
+        <div class="row">
+            {% if item.product_image %} 
+                <img src="{{ item.product_image.url }}" alt="{{ profile_details.title }}"/>
+            {% else %} 
+            {% endif %}
+            {% if item.trending %}
+            <div class="product-text">
+                <h5>HOT</h5>
+            </div>
+			{% endif %}
+			{% if item.new_arrivals %}
+			<div class="product-text">
+                <h5>NEW</h5>
+            </div>
+			{% endif %}
+            <div class="ratting">
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star-half'></i>
+            </div>
+            <div class="price">
+                <h4>{{item.name}}</h4>
+                <p>KSh {{ item.Selling_price}}</p>
+            </div>
+			
+        </div>
+		<a href="{% url 'detail' item.id %}">
+        {% endfor %}
+
+    </div>
+	<ul class="pagination">
+		{% comment %} <p>Page: {{ page.number }}/{{ page.paginator.num_pages}} {% endcomment %}
+		{% if page.has_previous %}
+		<li class="Prev"><a href="{% url 'shop' %}?page={{ page.previous_page_number }}">Prev</a></li>
+		{% endif %}
+		{% for num_page in page.paginator.page_range %}
+		<br/>
+		{% if page.number == num_page %}
+		<li class="page active"><a href="{% url 'shop' %}?page={{num_page}}">{{ num_page }}</a></li>
+		{% else %}
+		<li class="page"><a href="{% url 'shop' %}?page={{num_page}}">{{ num_page }}</a></li>
+		{% endif %}
+		{% endfor %}
+		
+		{% if page.has_next %}
+		<li class="next"><a href="{% url 'shop' %}?page={{ page.next_page_number }}">Next</a></li>
+		{% endif %}     
+
+	</ul>
+
+
+
+    <section class="banner">
+		<div class="banner-text">
+			<strong>Trendy Shoes</strong>
+			<span>From Ksh3000</span>
+			<p>Great Material And Price.This is Only For You</p>
+			<a href="">Buy Now</a>
+			{% comment %} <h4>20% OFF <br> NEW ARRIVAL </h4>
+			<a href="" class="baner-btn">Shop Now</a> {% endcomment %}
+		</div>
+		<div class="banner-img">
+			<img src="{% static 'images/low cut.png' %}" alt="banner">
+		</div>
+    </section>
+
+	{% comment %} <div class="search-container">
+		<div class="sidebar">
+			<div class="sidehead">
+				<div class="dots">
+					<i class="fa-solid fa-circle"></i>
+					<i class="fa-solid fa-circle" style="color: #333;"></i>
+					<i class="fa-solid fa-circle"></i>
+				</div>
+				<hr style="margin: 15px; border: 1px solid #333;">
+			</div>
+			<div class="sidebody" style="height: 69vh;">
+				<div class="searchbar">
+					<input placeholder="search..." id="searchbar" name="searchbar" type="text"> 
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</div>
+			</div>
+			<div class="sideboot">
+				
+			</div>
+
+		</div>
+		<div class="data">
+			<div class="top">
+				<p>0000000</p>
+				<p>gfeeggege</p>
+			</div>
+			<div class="top-header">
+				<P>buy online</P>
+			</div>
+		</div>
+	</div> {% endcomment %}
+{% endblock %}

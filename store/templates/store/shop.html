@@ -1,0 +1,109 @@
+{% extends "store/base.html"%}
+{% load static %}
+{% block content %}
+	<div class="center-text">
+		<h2>Our <span>Categories</span></h2>
+	</div>
+	<div class="category-container">
+		{% for category in categories %}
+		<a href="{% url 'category' category.id %}" class="category-box">
+			<img src="{{ category.image.url }}" alt="category"/>
+			<span>{{ category.name }}</span>
+		</a>
+		{% endfor %}
+	</div>
+	<section class="banner">
+		<div class="banner-text">
+			<h2>🔥FLASH SALE</h2>
+			<div id="countdown">00 : 00 : 00 : 00</div>
+			<strong>BLACK FRIDAY⚡</strong>
+			<p>BUY THREE GET ONE FREE🛒</p>
+			{% comment %} <a href="">Buy Now</a> {% endcomment %}
+		</div>
+		<div class="banner-img">
+			<img src="{% static 'images/low cut.png' %}" alt="banner">
+		</div>
+    </section>
+	
+	<div class="input-box">
+		<form class="d-flex"method="POST" action="{% url 'search' %}">
+			{% csrf_token %}
+			<i class="uil uil-search"></i>
+			<input type="text" placeholder="What are you looking for . . . ?" name="searched"/>
+			<button class="search-button"></button>
+		</form>
+		
+	</div>
+
+
+	<div class="products">
+        {% for item in page.object_list %}
+        <div class="row">
+            {% if item.product_image %} 
+                <img src="{{ item.product_image.url }}" alt="{{ profile_details.title }}">
+            {% else %} 
+            {% endif %}
+			{% if item.trending %}
+            <div class="product-text">
+                <h5>HOT</h5>
+            </div>
+			{% endif %}
+			{% if item.new_arrivals %}
+			<div class="product-text">
+                <h5>NEW</h5>
+            </div>
+			{% endif %}
+            <div class="ratting">
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+            </div>
+            <div class="price">
+				<h4>{{item.slug}}</h4>
+                <p>KSh {{ item.Selling_price}}</p>
+            </div>
+			
+        </div>
+		<a href="{% url 'detail' item.id %}">
+        {% endfor %}
+
+    </div>
+	<ul class="pagination">
+		{% comment %} <p>Page: {{ page.number }}/{{ page.paginator.num_pages}} {% endcomment %}
+		{% if page.has_previous %}
+		<li class="Prev"><a href="{% url 'shop' %}?page={{ page.previous_page_number }}">Prev</a></li>
+		{% endif %}
+		{% for num_page in page.paginator.page_range %}
+		<br/>
+		{% if page.number == num_page %}
+		<li class="page active"><a href="{% url 'shop' %}?page={{num_page}}">{{ num_page }}</a></li>
+		{% else %}
+		<li class="page"><a href="{% url 'shop' %}?page={{num_page}}">{{ num_page }}</a></li>
+		{% endif %}
+		{% endfor %}
+		
+		{% if page.has_next %}
+		<li class="next"><a href="{% url 'shop' %}?page={{ page.next_page_number }}">Next</a></li>
+		{% endif %}     
+
+	</ul>
+
+
+
+    
+
+	<div id="modelBox">
+		<img src="{% static 'images/ban.png'%}" width="80%">
+		<div class="offer-text">
+			<h2>Get 15% OFF</h2>
+			<small>ON OUR PRODUCTS</small>
+			<p>Get our products today shoes clothes hats pants skirts</p>
+			<form>
+				<input type="email" placeholder="Email Address">
+				<button type="submit">Subscribe</button>
+			</form>
+		</div>
+		<img src="{% static 'images/close.png'%}" class="close-icon" onclick="closeModel()">
+	</div>
+{% endblock %}

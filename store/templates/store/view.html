@@ -1,0 +1,54 @@
+{% load static%}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'images' %}">
+        <link rel="stylesheet" href="{% static 'js/script.js' %}">
+        <link rel="shortcut Icon" type="image/png" href="img/favicon.png">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet"href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        
+        {% comment %}fonts{% endcomment %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+        
+                    
+       
+        
+    </head>
+    <body>
+        <div class="view-container">
+            <header>
+                <a href="{% url 'home'%}" class="logo"><i class="ri-home-heart-fill"></i><span>Logo</span></a>
+                <ul class="navbar">
+                    <li><a href="{% url 'home'%}"{% if request.resolver_match.url_name == 'home'%}class="active"{% endif %}>Home</a></li>
+                    <li><a href="{% url 'shop'%}"{% if request.resolver_match.url_name == 'shop'%}class="active"{% endif %}>Shop</a></li>
+                    <li><a href="category"{% if request.resolver_match.url_name == 'category'%}class="active"{% endif %}>Categories</a></li>
+                    
+                </ul>
+    
+                <div class="main">
+                    <a href="" class="user"><i class="ri-user-2-fill"></i>Sign In</a>
+                    <a href="">Register</a>
+                    <div class="bx bx-menu" id="menu-icon"></div>
+                </div>
+            </header>
+        </div>
+        frrr
+        
+
+        <script type="text/JavaScript" src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>

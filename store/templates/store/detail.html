@@ -1,0 +1,285 @@
+{% extends "store/base.html" %}
+{% load static %}  
+{% block content %}
+<div class="py-3 bg-primary">
+    <div class="link-container">
+        <a class="text-white" href="{% url 'home'%}">Home  >></a>
+        <a class="text-white" href="{% url 'shop'%}">Shop  >></a>
+        <a class="text-white" href="">{{p.name}}  </a>
+    </div>
+</div>
+<hr>
+<div class="card-wrapper">
+    <div class="card">
+{% comment %} left {% endcomment %}
+        <div class="product-imgs">
+            <div class="img-display">
+                <div class="img-showcase">
+                    <img src="{{ p.product_image.url }}"alt shoe>
+                </div>
+            </div>
+        </div>
+        <div class="product-content">
+            <h2 class="product-title">{{p.name}}</h2>
+            <div class="product-rating">
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <span>5.6(26)</span>
+            </div>
+            <div class="product-price">
+                <p class="new-price">Price: <span>KSh.{{p.Selling_price}}</span></p>
+            </div>
+            <div class="product-detail">
+                <h2>About this item:</h2>
+                <p>{{p.description}}</p>
+            </div>
+            <form action="{% url 'cart:cart_add' p.id %}" method="POST">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <button type="submit" value="add to cart" id="add-animation" class="cart-btn addToCartBtn">Add to Cart</button>
+                
+            </form>
+
+        </div>
+        <div class="social-links">
+            <p>Share At: </p>
+            <a href="https://wa.me/15551234567?text=I'm%20interested%20in%20your%20car%20for%20sale" target="_blank"><i class="fab fa-whatsapp-square"></i></a>
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+<div class="center-text">
+    <h2>Related <span>Products</span></h2>
+</div>
+<div class="products">
+    {% for r in related %}
+    <div class="row">
+        <img src="{{ r.product_image.url  }}" alt="">
+        <div class="product-text">
+            <h5>NEW</h5>
+        </div>
+        <div class="ratting">
+            <i class='bx bx-star'></i>
+            <i class='bx bx-star'></i>
+            <i class='bx bx-star'></i>
+            <i class='bx bx-star-half'></i>
+        </div>
+        <div class="price">
+            <h4>{{r.name}}</h4>
+            <p>KSh {{r.Selling_price}}</p>
+        </div>
+    </div>
+    <a href="{% url 'detail' r.id %}">
+    {% endfor %}
+</div>
+
+<h2 id="fh2">WE APPRECIATE YOUR REVIEW!</h2>
+<h6 id="fh6">Your review will help us to improve our web hosting quality products, and customer services.</h6>
+
+<form id="feedback" action="" method="POST">
+    {% csrf_token %}
+    <div class="pinfo">Rate our item.</div>
+    <div id="full-stars-example-two">
+        <div class="rating-group">
+            <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio">
+            <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-1" value="1" type="radio">
+            <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-2" value="2" type="radio">
+            <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-3" value="3" type="radio">
+            <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-4" value="4" type="radio">
+            <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-5" value="5" type="radio">
+        </div>
+    </div>
+    <div class="pinfo">Write your review.</div>
+    <div class="form-group">
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                <textarea class="form-control" id="review" rows="3" name="review"></textarea>
+
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" id="rw">Submit</button>
+
+
+</form>
+<section id="testimonials">
+    <!--heading--->
+    <div class="testimonial-heading">
+        <span>Reviews</span>
+        <h4>Customer Reviews</h4>
+    </div>
+    <!--testimonials-box-container------>
+    <div class="testimonial-box-container">
+        <!--BOX-1-------------->
+        {% for re in review %}
+        <div class="testimonial-box">
+            <!--top------------------------->
+            <div class="box-top">
+                <!--profile----->
+                <div class="profile">
+                    <!--img---->
+                    <div class="profile-img">
+                        <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+                    </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                        <strong>{{r.user}}</strong>
+                        <span>@liammendes</span>
+                    </div>
+                </div>
+                <!--reviews------>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i><!--Empty star-->
+                </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+                <p>{{ re.review}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <!--BOX-2-------------->
+        <div class="testimonial-box">
+            <!--top------------------------->
+            <div class="box-top">
+                <!--profile----->
+                <div class="profile">
+                    <!--img---->
+                    <div class="profile-img">
+                        <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+                    </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                        <strong>Noah Wood</strong>
+                        <span>@noahwood</span>
+                    </div>
+                </div>
+                <!--reviews------>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><!--Empty star-->
+                </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+            </div>
+        </div>
+        <!--BOX-3-------------->
+        <div class="testimonial-box">
+            <!--top------------------------->
+            <div class="box-top">
+                <!--profile----->
+                <div class="profile">
+                    <!--img---->
+                    <div class="profile-img">
+                        <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+                    </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                        <strong>Oliver Queen</strong>
+                        <span>@oliverqueen</span>
+                    </div>
+                </div>
+                <!--reviews------>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i><!--Empty star-->
+                </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+            </div>
+        </div>
+        <!--BOX-4-------------->
+        <div class="testimonial-box">
+            <!--top------------------------->
+            <div class="box-top">
+                <!--profile----->
+                <div class="profile">
+                    <!--img---->
+                    <div class="profile-img">
+                        <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+                    </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                        <strong>Barry Allen</strong>
+                        <span>@barryallen</span>
+                    </div>
+                </div>
+                <!--reviews------>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i><!--Empty star-->
+                </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+            </div>
+        </div>
+        <div class="testimonial-box">
+            <!--top------------------------->
+            <div class="box-top">
+                <!--profile----->
+                <div class="profile">
+                    <!--img---->
+                    <div class="profile-img">
+                        <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+                    </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                        <strong>Barry Allen</strong>
+                        <span>@barryallen</span>
+                    </div>
+                </div>
+                <!--reviews------>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i><!--Empty star-->
+                </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block title %}
+    shopping Cart
+{% endblock %}
+
+{% block content %}
+
+{% comment %} <table>
+    <thead>
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Remove</th>
+        <th>Unit Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+    {% with product=item.product %}
+    <tr>
+        <td>
+            <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.product_image.url  }}">
+            </a>
+        </td>
+        <td> {{ product.name }} </td>
+        <td> {{ item.quantity }} </td>
+        <td>
+            <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                <input type="submit" value="remove">
+                {% csrf_token %}
+            </form>
+        </td>
+        <td class="num">KSh{{ item.price }}</td>
+        <td class="num">KSh{{ item.total_price }}</td>
+    </tr>
+    {% endwith %}
+    {% endfor %}
+    <tr class="total">
+        <td>Total</td>
+        <td  colspan="4"></td>
+        <td class="num">KSh</td>
+    </tr>
+    </tbody>
+</table> 
+<p class="text-right">
+    <a href="" class="buttonlight">Continue shopping</a>
+    <a href="" class="buttton"> checkout </a>
+</p>  {% endcomment %}
+
+
+<div class="cart-container">
+    <h1>Shopping Cart</h1>
+    <div class="cart">
+        <div class="cart-products">
+            <div class="product">
+                {% for item in cart %}
+                {% with product=item.product %}
+                
+                    <img src="{{ product.product_image.url }}"/>
+                    <div class="product-info">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        <h4 class="product-price">KSh{{ item.price }}</h4>
+                        <h4 class="product-offer">50%</h4>
+                        <p class="product-quantity">{{ item.quantity }}<input value="1" name="">
+                        <p class="product-remove">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                                <input type="submit" value="remove">
+                                {% csrf_token %}
+                            </form>
+                        </p>
+                    
+                    </div>
+                {% endwith %}
+                {% endfor %}
+                
+            </div>        
+        </div>
+        <div class="cart-total">
+            <p>
+                <span>Total Price</span>
+                <span>Ksh 4500</span>
+            </p>
+            <p>
+                <span>Number of Items</span>
+                <span>5</span>
+            </p>
+            <p>
+                <span>You Save</span>
+                <span>Ksh 500</span>
+            </p>
+            <a href="{% url 'checkout' %}">Proceed to checkout</a>
+
+        </div>
+    </div>
+</div>
+
+{% comment %} <div class="small-container">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            {% for item in cart %}
+            {% with product=item.product %}
+            <td>
+                <div class="cart-info">
+                    <img src="{{ product.product_image.url }}">
+                    <div>
+                        <p>{{ product.name }}</p>
+                        <small>PRICE:KSh {{ item.price }}</small>
+                        <a href="">Remove</a>
+                        <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                            <input type="submit" value="remove" class="remove">
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="1"></td>
+            <td>Ksh.{{ item.price }}</td>
+            {% endwith %}
+            {% endfor %}
+        </tr>
+    </table>
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Number of items</td>
+                <td>5</td>
+            </tr>
+
+            <tr>
+                <td>Subtotal</td>
+                <td>Ksh 10000</td>
+                <td>
+                    <a href="{% url 'checkout' %}">Proceed to checkout</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>  {% endcomment %}
+  
+
+{% endblock %}

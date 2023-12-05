@@ -1,0 +1,68 @@
+{% extends "store/base.html" %}
+{% load static%}
+
+{% block content %}
+<div class="cart-container">
+    <h1>Shopping Cart</h1>
+    <div class="cart">
+        <div class="cart-products">
+            <div class="product">
+                <img src="{%static 'images/sho4.jpeg'%}"/>
+                <div class="product-info">
+                    <h3 class="product-name">New Shoes</h3>
+                    <h4 class="product-price">ksh 4400</h4>
+                    <h4 class="product-offer">50%</h4>
+                    <p class="product-quantity">Qnt: <input value="1" name="">
+                    <p class="product-remove">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <span class="remove">Remove</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="{%static 'images/sho4.jpeg'%}">
+                <div class="product-info">
+                    <h3 class="product-name">New Shoes</h3>
+                    <h4 class="product-price">ksh 4400</h4>
+                    <h4 class="product-offer">50%</h4>
+                    <p class="product-quantity">Qnt: <input value="1" name="">
+                    <p class="product-remove">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <span class="remove">Remove</span>
+                </div>
+            </div>
+            <div class="product">
+                <img src="{%static 'images/sho4.jpeg'%}">
+                <div class="product-info">
+                    <h3 class="product-name">New Shoes</h3>
+                    <h4 class="product-price">ksh 4400</h4>
+                    <h4 class="product-offer">50%</h4>
+                    <p class="product-quantity">Qnt: <input value="1" name="">
+                    <p class="product-remove">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <span class="remove">Remove</span>
+                </div>
+            </div>
+        </div>
+            <div class="cart-total">
+                <p>
+                    <span>Total Price</span>
+                    <span>Ksh 4500</span>
+                </p>
+                <p>
+                    <span>Number of Items</span>
+                    <span>5</span>
+                </p>
+                <p>
+                    <span>You Save</span>
+                    <span>Ksh 500</span>
+                </p>
+                <a href="">Proceed to checkout</a>
+
+            </div>
+    </div>
+</div>
+
+
+{% endblock %}

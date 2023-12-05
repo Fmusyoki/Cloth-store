@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+     
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link id="theme-style" rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'images' %}">
+        <link rel="shortcut Icon" type="image/png" href="img/favicon.png">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet"href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+        
+        {% comment %}fonts{% endcomment %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+              
+    </head>
+    <body>
+        
+        <div class="base-container">
+            <header>
+                
+                <a href="{% url 'home'%}" class="logo"><img src="{% static 'images/t-removebg-preview.png' %}" class="img-logo"></a>
+            
+                
+                <ul class="navbar">
+                    <li><a href="{% url 'home'%}"{% if request.resolver_match.url_name == 'home'%}class="active"{% endif %}><i class="ri-home-3-fill"></i>Home</a></li>
+                    {% comment %} <li><a href="{% url 'shop'%}"{% if request.resolver_match.url_name == 'shop'%}class="active"{% endif %}><i class="ri-shopping-bag-line"></i>Shop</a></li> {% endcomment %}
+                    <div class="dropdown">
+                        <li><a href="{% url 'shop'%}"{% if request.resolver_match.url_name == 'shop'%}class="active"{% endif %}><i class="ri-shopping-bag-line"></i>shop<i class="ri-arrow-drop-down-fill"></i></a></li>
+                        <div class="dropdown-content">
+                            <a href=""><i class="ri-shopping-basket-line"></i>T-shirts</a>
+                            <a href="#"><i class="ri-shopping-basket-line"></i>Skirts</a>
+                            <a href="{% url 'logout'%}"><i class="ri-shopping-basket-line"></i></box-icon>Pants</a>
+                            <a href="{% url 'logout'%}"><i class="ri-shopping-basket-line"></i>Hats</a>
+                            <a href="{% url 'logout'%}"><i class="ri-shopping-basket-line"></i>Shoes</a>
+                            <a href=""><i class="ri-shopping-basket-line"></i>Jackets</a>
+                            
+                        </div>
+                    </div>
+                    <li><a href="{% url 'cart'%}"{% if request.resolver_match.url_name == 'cart'%}class="active"{% endif %}><i class="ri-shopping-cart-2-fill"></i>Cart</a></li>
+                    <div class="dropdown">
+                        <li><a href=""><i class="ri-user-2-fill"></i>Account</a></li>
+                        <div class="dropdown-content">
+                            <a href="{% url 'register'%}"><i class="ri-user-add-line"></i> Register</a>
+                            <a href="#"><i class="ri-login-box-fill"></i>Log In</a>
+                            <a href="{% url 'logout'%}"><i class="ri-logout-box-fill"></i></box-icon> Sign Out</a>
+                        </div>
+                    </div>
+                    {% comment %} <div class="counter-container">
+                        <span id="counter">1</span>
+                        <li><a href="{% url 'shop'%}"{% if request.resolver_match.url_name == 'shop'%}class="active"{% endif %}><i class="ri-shopping-cart-2-fill"></i>Cart</a></li>
+                    </div> {% endcomment %}
+                </ul>
+                <form class="d-flex"method="POST" action="{% url 'search' %}" id="myForm">
+                    {% csrf_token %}
+                <div class="box">
+                    <input type="text" placeholder="search for..." name="searched" class="holder">
+                    <a href="">
+                        <i class="fa fa-search" id="search-icon"></i>
+                    </a>
+                </div>
+                </form>
+                
+                <img src="{% static 'images/moon.png' %}" id="dark">
+
+            </header>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}">
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="content">
+                <a href="{% url 'shop' %}" class="btnn" id="btn">Shop Now</a>
+                <h1>Get Trendy Clothes<br>SEPTEMBER SALE </h1>
+                <p> SAVE 20% OFF!! </p>
+                
+                {% comment %} <h2>COMING SOON!!</h2><div id="counts">00 : 00 : 00 : 00</div> {% endcomment %}
+                
+            </div>
+            
+
+        </div>
+         
+        
+        
+        {% block content %}
+
+        {% endblock %}
+    
+        <div class="footer">
+            <div class="container-fot">
+                <div class="row-fot">
+                    <div class="footer-col">
+                        <h4>RStore</h4>
+                        <ul>
+                            <li><a href="{% url 'about' %}">About us</a></li>
+                            <li><a href="">Our Services</a></li>
+                            <li><a href="">Privacy policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Get Help</h4>
+                        <ul>
+                            <li><a href="">FAQ</a></li>
+                            <li><a href="">Shipping returns</a></li>
+                            <li><a href="">Returns</a></li>
+                            <li><a href="">Order status</a></li>
+                            <li><a href="">Payment Option</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Our Shop</h4>
+                        
+                        <ul>
+                            
+                            <li><a href="{% url 'shop' %}" >Shoes</a></li>
+                            <li><a href="{% url 'shop' %}">Shorts</a></li>
+                            <li><a href="{% url 'shop' %}">T-shirts</a></li>
+                            <li><a href="{% url 'shop' %}">Skirts</a></li>
+                            <li><a href="{% url 'shop' %}">Jackets</a></li>
+                            <li><a href="{% url 'shop' %}">Hats</a></li>
+                            
+                        </ul>
+            
+                    </div>
+                    <div class="footer-col">
+                        <h4>Reach Us On</h4>
+                        <div class="social-link">
+                            <a href="https://wa.me/15551234567?text=I'm%20interested%20in%20your%20car%20for%20sale" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>Copyright 2023 TRENDYSTORE, All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+        <script src="{% static 'js/app.js' %}" type="text/javascript"></script>
+         
+  
+    </body>
+   
+</html>

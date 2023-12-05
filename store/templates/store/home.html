@@ -1,0 +1,70 @@
+{% extends "store/base.html" %}
+{% load static%}
+
+{% block content %}
+<section class="trending-product" id="trending">
+    <div class="center-text">
+        <h2 id="trending">Trending <span>Products</span></h2>
+    </div>
+
+    <div class="products">
+        {% for item in trending %}
+        <div class="row">
+            {% if item.product_image %} 
+                <img src="{{ item.product_image.url }}" alt="{{ profile_details.title }}">
+            {% else %} 
+            {% endif %}
+            <div class="product-text">
+                <h5>HOT</h5>
+            </div>
+            <div class="ratting">
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star-half'></i>
+            </div>
+            <div class="price">
+                <h4>{{item.name}}</h4>
+                <p>KSh {{ item.Selling_price}}</p>
+            </div>
+        </div>
+        <a href="{% url 'detail' item.id %}">
+        {% endfor %}
+    </div>
+    {% comment %} arrivals {% endcomment %}{% comment %} arrivals {% endcomment %}
+
+    
+
+
+    <div class="center-text">
+        <h2>New <span>Arrivals</span></h2>
+    </div>
+
+    <div class="products">
+        {% for item in arrivals %}
+        <div class="row">
+            <img src="{{ item.product_image.url  }}" alt="">
+            <div class="product-text">
+                <h5>NEW</h5>
+            </div>
+            <div class="ratting">
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-star-half'></i>
+            </div>
+            <div class="price">
+                <h4>{{item.name}}</h4>
+                <p>KSh {{item.Selling_price}}</p>
+            </div>
+        </div>
+        <a href="{% url 'detail' item.id %}">
+        {% endfor %}
+    </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}
